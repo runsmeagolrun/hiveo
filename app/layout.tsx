@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 
 import { auth } from "@/auth";
 import { ThemeProvider } from "@/components/ui/providers/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,6 +45,7 @@ export default async function RootLayout({
             disableTransitionOnChange
             storageKey="hiveo-theme"
           >
+            <Toaster />
             {children}
           </ThemeProvider>
         </body>
