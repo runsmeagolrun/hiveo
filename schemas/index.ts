@@ -70,3 +70,21 @@ export const RegisterSchema = z.object({
     message: "Name is required",
   }),
 });
+
+const BaseDocumentSchema = z.object({
+  title: z.string(),
+  userId: z.string(),
+  isArchived: z.boolean(),
+  content: z.optional(z.string()),
+  coverImage: z.optional(z.string()),
+  icon: z.optional(z.string()),
+  isPublished: z.boolean(),
+});
+
+type Document = z.infer<typeof BaseDocumentSchema> & {
+  parentDocument: Document[];
+};
+
+export const DocumentSchema: z.ZodType<Document> = BaseDocumentSchema.extend({
+  parentDocument: z.lazy(() => DocumentSchema.array()),
+});
